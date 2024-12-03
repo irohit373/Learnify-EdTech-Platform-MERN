@@ -57,7 +57,7 @@ const Footer = () => {
 
             <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
               <h1 className="text-richblack-50 font-semibold text-[16px]">
-                Resourcess
+                Resources
               </h1>
 
               <div className="flex flex-col gap-2 mt-2">
