@@ -1,21 +1,15 @@
 import React from 'react'
 import CTAButton from "../../../Component/Core/HomePage/Button";
 import { FaArrowRight } from "react-icons/fa";
-import Instructor from "../../../Asset/Image/Instructor.png";
+import Instructor from "../../../Asset/Image/CollegeInstructor.png";
 import HighlightText from './HighlightText';
 
 const InstructorSection = () => {
   return (
     <div>
-        <div className="flex flex-col lg:flex-row gap-20 items-center">
-          <div className="lg:w-[50%]">
-            <img
-              src={Instructor}
-              alt=""
-              className="shadow-white shadow-[-20px_-20px_0_0]"
-            />
-          </div>
-          <div className="lg:w-[50%] flex gap-10 flex-col">
+        <div className="flex flex-col lg:flex-row gap-20 items-center ">
+
+          <div className="lg:w-[50%] flex gap-10 flex-col ">
             <h1 className="lg:w-[50%] text-4xl font-semibold ">
               Become an
               <HighlightText text={"instructor"} />
@@ -35,8 +29,19 @@ const InstructorSection = () => {
                 </div>
               </CTAButton>
             </div>
+
           </div>
+
+          <div className="lg:w-[50%]">
+            <img
+              src={Instructor}
+              alt=""
+              className="shadow-white shadow-[-20px_-20px_0_0]"
+            />
+          </div>
+
         </div>
+
     </div>
   )
 }
