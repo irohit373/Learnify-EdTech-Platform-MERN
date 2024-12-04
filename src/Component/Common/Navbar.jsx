@@ -34,19 +34,18 @@ function Navbar() {
   const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   
-  // const [subLinks, setSubLinks] = useState([]);
+  const [subLinks, setSubLinks] = useState([]);
   // THis up or THis one down
-  const subLinks = [
-    {
-      name : "Python",
-      link: "/catalogPython"
-    },
-    {
-      name : "Python",
-      link: "/catalogPython"
-    }
-  
-  ]
+  // const subLinks = [
+  //   {
+  //     name : "Python",
+  //     link: "/catalogPython"
+  //   },
+  //   {
+  //     name : "Python",
+  //     link: "/catalogPython"
+  //   }
+  // ]
   
     useEffect(() => {
     (async () => {
