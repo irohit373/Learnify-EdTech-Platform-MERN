@@ -1,4 +1,4 @@
-import logo from "../../Asset/Logo/Logo-Full-Red.png";
+import logo from "../../Asset/Logo/Logo-full-white.png";
 import { NavbarLinks } from "../../Data/Navbar-Link";
 import { logout } from "../../Service/Operation/authAPI";
 import { apiConnector } from "../../Service/apiConnector";
@@ -34,19 +34,18 @@ function Navbar() {
   const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   
-  // const [subLinks, setSubLinks] = useState([]);
+  const [subLinks, setSubLinks] = useState([]);
   // THis up or THis one down
-  const subLinks = [
-    {
-      name : "Python",
-      link: "/catalogPython"
-    },
-    {
-      name : "Python",
-      link: "/catalogPython"
-    }
-  
-  ]
+  // const subLinks = [
+  //   {
+  //     name : "Python",
+  //     link: "/catalogPython"
+  //   },
+  //   {
+  //     name : "Python",
+  //     link: "/catalogPython"
+  //   }
+  // ]
   
     useEffect(() => {
     (async () => {
