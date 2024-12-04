@@ -81,7 +81,7 @@ function Home() {
               "Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
             }
             ctabtn1={{
-              btnText: "Try it Yourself",
+              btnText: "Continue Lesson",
               link: "/signup",
               active: true,
             }}
@@ -97,7 +97,7 @@ function Home() {
         </div>
 
         {/* Code Section 2 */}
-        <div>
+        {/* <div>
           <CodeBlocks
             position={"lg:flex-row-reverse"}
             heading={
@@ -123,7 +123,7 @@ function Home() {
             codeblock={`import React from "react";\n import CTAButton from "./Button";\nimport TypeAnimation from "react-type";\nimport { FaArrowRight } from "react-icons/fa";\n\nconst Home = () => {\nreturn (\n<div>Home</div>\n)\n}\nexport default Home;`}
             backgroundGradient={<div className="codeblock2 absolute"></div>}
           />
-        </div>
+        </div> */}
 
         {/* Explore Section */}
         <ExploreMore />
@@ -180,10 +180,10 @@ function Home() {
         <InstructorSection />
 
         {/* Reviws from Other Learner */}
-        <h1 className="text-center text-4xl font-semibold mt-8">
+        {/* <h1 className="text-center text-4xl font-semibold mt-8">
           Reviews From Other Learner
         </h1>
-        {/* <ReviewSlider /> */}
+        <ReviewSlider />
       </div>
 
       {/* Footer */}

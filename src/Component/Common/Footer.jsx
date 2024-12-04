@@ -47,7 +47,6 @@ const Footer = () => {
                 })}
               </div>
               <div className="flex gap-3 text-lg">
-                <FaFacebook />
                 <FaGoogle />
                 <FaTwitter />
                 <FaYoutube />
@@ -172,7 +171,7 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center">Made By Hindol Roy © 2023 Learnify</div>
+          <div className="text-center">©2024Learnify</div>
         </div>
       </div>
     </div>
