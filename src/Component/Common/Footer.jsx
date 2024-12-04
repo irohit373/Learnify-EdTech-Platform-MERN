@@ -171,7 +171,7 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center">Made By Hindol Roy © 2023 Learnify</div>
+          <div className="text-center">©2024Learnify</div>
         </div>
       </div>
     </div>
