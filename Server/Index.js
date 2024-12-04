@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+
 const userRoutes = require("./Route/User");
 const profileRoutes = require("./Route/Profile");
 const courseRoutes = require("./Route/Course");
