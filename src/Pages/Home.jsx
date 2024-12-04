@@ -183,9 +183,9 @@ function Home() {
         {/* <h1 className="text-center text-4xl font-semibold mt-8">
           Reviews From Other Learner
         </h1>
-        <ReviewSlider />
-      </div>
-
+        <ReviewSlider /> */}
+        </div>
+        
       {/* Footer */}
       <Footer />
     </div>
