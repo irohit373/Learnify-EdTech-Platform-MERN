@@ -3,7 +3,7 @@ import { FooterLink2 } from "../../Data/Footer-Link"
 import { Link } from "react-router-dom";
 
 // Images
-import Logo from "../../Asset/Logo/Logo-Full-Light.png";
+import Logo from "../../Asset/Logo/Logo-Full-Red.png";
 
 // Icons
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
@@ -172,7 +172,7 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center">Made By Hindol Roy © 2023 Learnify</div>
+          <div className="text-center"> © 2024 Learnify</div>
         </div>
       </div>
     </div>

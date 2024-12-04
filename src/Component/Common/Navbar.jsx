@@ -1,4 +1,4 @@
-import logo from "../../Asset/Logo/Logo-Full-Light.png";
+import logo from "../../Asset/Logo/Logo-Full-Red.png";
 import { NavbarLinks } from "../../Data/Navbar-Link";
 import { logout } from "../../Service/Operation/authAPI";
 import { apiConnector } from "../../Service/apiConnector";
