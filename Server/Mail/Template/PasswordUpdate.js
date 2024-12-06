@@ -56,7 +56,7 @@ exports.passwordUpdated = (email, name) => {
     <body>
         <div class="container">
             <a href="https://Learnify-coral.vercel.app"><img class="logo"
-                    src="https://i.ibb.co/R9R7Kx3/logo-white.png" alt="Learnify Logo"></a>
+                    src="https://i.ibb.co/y0J9Yjf/Logo-Full-Gradient.png" alt="Learnify Logo"></a>
             <div class="message">Password Update Confirmation</div>
             <div class="body">
                 <p>Hey ${name},</p>
