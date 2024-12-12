@@ -2,7 +2,7 @@
 
 ## Front End
 
-The front end of StudyNotion has all the necessary pages that an ed-tech platform should
+The front end  has all the necessary pages that an ed-tech platform should
 have.
 
 ## Back End
