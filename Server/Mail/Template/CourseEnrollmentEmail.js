@@ -67,7 +67,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
   
   <body>
       <div class="container">
-          <a href="https://Learnify-coral.vercel.app"><img class="logo" src="https://i.ibb.co/R9R7Kx3/logo-white.png"
+          <a href="https://Learnify-coral.vercel.app"><img class="logo" src="https://i.ibb.co/y0J9Yjf/Logo-Full-Gradient.png"
                   alt="Learnify Logo"></a>
           <div class="message">Course Registration Confirmation</div>
           <div class="body">
