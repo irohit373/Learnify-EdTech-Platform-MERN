@@ -1,5 +1,15 @@
-# Learnify
+# Learnify - A Robust Ed-Tech Platform with a RESTful API
 
+Learnify is a modern educational technology platform built on a powerful MERN (MongoDB, Express.js, React.js, Node.js) stack. The backend, developed with Node.js and Express.js, provides a well-documented RESTful API for seamless interaction with the React.js frontend.
+
+Key backend features include:
+
+* MongoDB for flexible and scalable data storage.
+* JWT and Bcrypt for secure user authentication and password hashing.
+* Mongoose for elegant MongoDB data modeling.
+* Cloudinary integration for efficient media management.
+
+The API follows REST architectural principles, utilizing JSON for data exchange and standard HTTP methods (GET, POST, PUT, DELETE) for operations on resources like user accounts and courses.
 ## Front End
 
 The front end  has all the necessary pages that an ed-tech platform should
