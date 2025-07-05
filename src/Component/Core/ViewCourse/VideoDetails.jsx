@@ -201,7 +201,7 @@ const VideoDetails = () => {
                     <div className='flex justify-center items-center'>
                       <div className='flex justify-center items-center'>
                         {
-                          !completedLectures.includes(videoData._id) && (
+                          !completedLectures?.includes(videoData._id) && (
                             <button onClick={() => { handleLectureCompletion() }} className='bg-yellow-100 text-richblack-900 absolute top-[20%] hover:scale-90 z-20 font-medium md:text-sm px-4 py-2 rounded-md'>Mark as Completed</button>
                           )
                         }

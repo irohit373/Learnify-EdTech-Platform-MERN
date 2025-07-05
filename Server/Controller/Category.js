@@ -31,12 +31,12 @@ exports.createCategory = async (req, res) => {
 exports.showAllCategories = async (req, res) => {
   try {
     const allCategories = await Category.find().populate("courses");
-    const categoriesWithPublishedCourses = allCategories.filter((category) =>
-      category.courses.some((course) => course.status === "Published")
-    );
+    
+    // Return all categories, even if they don't have courses
+    // This ensures the dropdown shows all available categories
     res.status(200).json({
       success: true,
-      data: categoriesWithPublishedCourses,
+      data: allCategories,
     });
   } catch (error) {
     res.status(500).json({
@@ -67,9 +67,28 @@ exports.categoryPageDetails = async (req, res) => {
 
     if (selectedCategory.courses.length === 0) {
       console.log("No courses found for the selected category.");
+      
+      // Still provide other categories and most selling courses even if this category is empty
+      const allCategories = await Category.find()
+        .populate({
+          path: "courses",
+          match: { status: "Published" },
+        })
+        .exec();
+      
+      const allCourses = allCategories.flatMap((category) => category.courses);
+      const mostSellingCourses = allCourses
+        .sort((a, b) => (b.studentsEnrolled?.length || 0) - (a.studentsEnrolled?.length || 0))
+        .slice(0, 10);
+
       return res.status(200).json({
         success: true,
         message: "No courses found for the selected category.",
+        data: {
+          selectedCategory,
+          differentCategory: null,
+          mostSellingCourses,
+        },
       });
     }
 
@@ -95,7 +114,7 @@ exports.categoryPageDetails = async (req, res) => {
       .exec();
     const allCourses = allCategories.flatMap((category) => category.courses);
     const mostSellingCourses = allCourses
-      .sort((a, b) => b.sold - a.sold)
+      .sort((a, b) => (b.studentsEnrolled?.length || 0) - (a.studentsEnrolled?.length || 0))
       .slice(0, 10);
 
     res.status(200).json({

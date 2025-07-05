@@ -244,9 +244,9 @@ exports.getCourseDetails = async (req, res) => {
     }
 
     let totalDurationInSeconds = 0;
-    courseDetails.courseContent.forEach((content) => {
-      content.subSection.forEach((subSection) => {
-        const timeDurationInSeconds = parseInt(subSection.timeDuration);
+    courseDetails.courseContent?.forEach((content) => {
+      content.subSection?.forEach((subSection) => {
+        const timeDurationInSeconds = parseInt(subSection.timeDuration) || 0;
         totalDurationInSeconds += timeDurationInSeconds;
       });
     });
@@ -305,9 +305,9 @@ exports.getFullCourseDetails = async (req, res) => {
     }
 
     let totalDurationInSeconds = 0;
-    courseDetails.courseContent.forEach((content) => {
-      content.subSection.forEach((subSection) => {
-        const timeDurationInSeconds = parseInt(subSection.timeDuration);
+    courseDetails.courseContent?.forEach((content) => {
+      content.subSection?.forEach((subSection) => {
+        const timeDurationInSeconds = parseInt(subSection.timeDuration) || 0;
         totalDurationInSeconds += timeDurationInSeconds;
       });
     });
@@ -371,7 +371,7 @@ exports.deleteCourse = async (req, res) => {
       return res.status(404).json({ message: "Course not found" });
     }
 
-    const studentsEnrolled = course.studentsEnroled;
+    const studentsEnrolled = course.studentsEnrolled;
     for (const studentId of studentsEnrolled) {
       await User.findByIdAndUpdate(studentId, {
         $pull: { courses: courseId },

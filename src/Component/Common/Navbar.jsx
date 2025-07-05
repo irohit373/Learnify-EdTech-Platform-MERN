@@ -11,6 +11,7 @@ import { categories } from '../../Service/apis'
 import { useState } from 'react'
 import {IoIosArrowDown} from "react-icons/io"
 import {RxHamburgerMenu} from "react-icons/rx"
+import { createCategoryURL } from '../../Util/categoryUtils'
 import './loader.css'
 // Ḍemo temporary data
 // const subLinks = [
@@ -92,7 +93,7 @@ const Navbar = () => {
                                 {
                                     subLinks.length ? (
                                             subLinks.map( (subLink, index) => (
-                                                <Link className='rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50' to={`catalog/${subLink.name}`} key={index}>
+                                                <Link className='rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50' to={`catalog/${createCategoryURL(subLink.name)}`} key={index}>
                                                     <p>{subLink.name}</p>
                                                 </Link>
                                             ) )

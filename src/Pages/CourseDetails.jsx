@@ -69,7 +69,7 @@ function CourseDetails() {
   useEffect(() => {
     let lectures = 0
     response?.data?.courseDetails?.courseContent?.forEach((sec) => {
-      lectures += sec.subSection.length || 0
+      lectures += sec?.subSection?.length || 0
     })
     setTotalNoOfLectures(lectures)
   }, [response])
@@ -82,6 +82,9 @@ function CourseDetails() {
     )
   }
   if (!response.success) {
+    return <Error />
+  }
+  if (!response.data?.courseDetails) {
     return <Error />
   }
 
@@ -97,7 +100,7 @@ function CourseDetails() {
     instructor,
     studentsEnroled,
     createdAt,
-  } = response.data?.courseDetails
+  } = response.data?.courseDetails || {}
 
   const handleBuyCourse = () => {
     if (token) {
@@ -158,12 +161,12 @@ function CourseDetails() {
               <div className="text-md flex flex-wrap items-center gap-2 lg:justify-start justify-center">
                 <span className="text-yellow-25">{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
-                <span>{`(${ratingAndReviews.length} reviews)`}</span>
-                <span>{`${studentsEnroled.length} students enrolled`}</span>
+                <span>{`(${ratingAndReviews?.length || 0} reviews)`}</span>
+                <span>{`${studentsEnroled?.length || 0} students enrolled`}</span>
               </div>
               <div>
                 <p className="">
-                  Created By {`${instructor.firstName} ${instructor.lastName}`}
+                  Created By {`${instructor?.firstName || ''} ${instructor?.lastName || ''}`}
                 </p>
               </div>
               <div className="flex flex-wrap gap-5 text-lg">
@@ -204,12 +207,12 @@ function CourseDetails() {
             <p className="text-3xl font-semibold uppercase tracking-wider">What you'll Learn?</p>
             <div className="mt-5">
               <ul style={{ listStyle: 'none', padding: 0 }} className="leading-relaxed">
-                {whatYouWillLearn.split('\n').map((line, index) => (
+                {whatYouWillLearn?.split('\n').map((line, index) => (
                   <li key={index} style={{ display: 'flex', alignItems: 'flex-start' }}>
                     <span style={{ marginRight: '0.5em' }}>{index + 1}.</span>
                     <span>{line.trim().substring(line.indexOf('.') + 1).trim()}</span>
                   </li>
-                ))}
+                )) || []}
               </ul>
             </div>
           </div>
@@ -221,7 +224,7 @@ function CourseDetails() {
               <div className="flex flex-wrap justify-between gap-2">
                 <div className="flex gap-2 tracking-wide">
                   <span>
-                    {courseContent.length} {`section(s)`}
+                    {courseContent?.length || 0} {`section(s)`}
                   </span>
                   <span>
                     {totalNoOfLectures} {`lecture(s)`}
@@ -257,14 +260,14 @@ function CourseDetails() {
               <div className="flex items-center gap-4 py-4">
                 <img
                   src={
-                    instructor.image
+                    instructor?.image
                       ? instructor.image
-                      : `https://api.dicebear.com/5.x/initials/svg?seed=${instructor.firstName} ${instructor.lastName}`
+                      : `https://api.dicebear.com/5.x/initials/svg?seed=${instructor?.firstName || 'User'} ${instructor?.lastName || 'Name'}`
                   }
                   alt="Author"
                   className="h-14 w-14 rounded-full object-cover"
                 />
-                <p className="text-lg">{`${instructor.firstName} ${instructor.lastName}`}</p>
+                <p className="text-lg">{`${instructor?.firstName || ''} ${instructor?.lastName || ''}`}</p>
               </div>
               <p className="text-richblack-50">
                 {instructor?.additionalDetails?.about}

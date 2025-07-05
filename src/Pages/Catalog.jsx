@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
-
-
 import Footer from "../Component/Common/Footer"
 import Course_Card from "../Component/Core/Catalog/Course_Card"
 import Course_Slider from "../Component/Core/Catalog/Course_Slider"
 import { apiConnector } from "../Service/apiConnector"
 import { categories } from "../Service/apis"
 import { getCatalogPageData } from "../Service/Operation/pageAndComponntDatas"
+import { matchCategoryFromURL } from "../Util/categoryUtils"
 import Error from "./Error"
 
 function Catalog() {
@@ -18,17 +17,60 @@ function Catalog() {
   const [active, setActive] = useState(1)
   const [catalogPageData, setCatalogPageData] = useState(null)
   const [categoryId, setCategoryId] = useState("")
+  const [error, setError] = useState(null)
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true)
 
   useEffect(() => {
      (async () => {
       try {
+        setIsLoadingCategories(true);
+        setError(null);
+        
         const res = await apiConnector("GET", categories.CATEGORIES_API)
-        const category_id = res?.data?.data?.filter(
-          (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
-        )[0]._id
-        setCategoryId(category_id)
+        console.log("Categories API response:", res?.data);
+        
+        if (!res?.data?.success || !res?.data?.data) {
+          console.log("Invalid categories response structure:", res?.data);
+          setError("Failed to load categories");
+          setIsLoadingCategories(false);
+          return;
+        }
+        
+        const categoriesData = res.data.data;
+        
+        if (categoriesData.length === 0) {
+          console.log("No categories found in database");
+          setError("No categories available");
+          setIsLoadingCategories(false);
+          return;
+        }
+        
+        console.log(`Looking for category matching "${catalogName}"`);
+        console.log("Available categories:", categoriesData.map(cat => cat.name));
+        
+        // Use the utility function to match category
+        const matchedCategory = matchCategoryFromURL(catalogName, categoriesData);
+        
+        if (!matchedCategory) {
+          console.log(`No category found matching "${catalogName}"`);
+          console.log("URL formats expected:");
+          categoriesData.forEach(cat => {
+            console.log(`- ${cat.name} → /catalog/${cat.name.toLowerCase().replace(/\s+/g, '-')}`);
+          });
+          setError(`Category "${catalogName}" not found`);
+          setIsLoadingCategories(false);
+          return;
+        }
+        
+        console.log(`Matched category: ${matchedCategory.name}`);
+        
+        const category_id = matchedCategory._id;
+        setCategoryId(category_id);
+        setIsLoadingCategories(false);
       } catch (error) {
-        console.log("Could not fetch Categories.", error)
+        console.log("Could not fetch Categories.", error);
+        setError("Failed to fetch categories");
+        setIsLoadingCategories(false);
       }
     })()
   }, [catalogName])
@@ -45,7 +87,49 @@ function Catalog() {
     }
   }, [categoryId])
 
-  if (loading || !catalogPageData) {
+  if (isLoadingCategories || loading) {
+    return (
+      <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+        <div className="spinner"></div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-richblack-5 mb-4">Error</h2>
+          <p className="text-richblack-300 mb-6">{error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-yellow-400 text-richblack-900 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (!categoryId) {
+    return (
+      <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-richblack-5 mb-4">Category Not Found</h2>
+          <p className="text-richblack-300 mb-6">The category "{catalogName}" could not be found.</p>
+          <a 
+            href="/courses" 
+            className="bg-yellow-400 text-richblack-900 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition-colors"
+          >
+            View All Courses
+          </a>
+        </div>
+      </div>
+    )
+  }
+
+  if (!catalogPageData) {
     return (
       <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
         <div className="spinner"></div>
