@@ -47,7 +47,10 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
       text2: "Please login to add To Cart",
       btn1Text: "Login",
       btn2Text: "Cancel",
-      btn1Handler: () => navigate("/login"),
+      btn1Handler: () => {
+                          setConfirmationModal(null)
+                          navigate("/login")
+                        },
       btn2Handler: () => setConfirmationModal(null),
     })
   }

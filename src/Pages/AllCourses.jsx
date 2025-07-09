@@ -16,9 +16,7 @@ const AllCourses = () => {
     const fetchCourses = async () => {
       try {
         setLoading(true);
-        console.log("Fetching all courses...");
         const result = await getAllCourses();
-        console.log("Courses fetched:", result);
         setCourses(result || []);
         setError(null);
       } catch (err) {

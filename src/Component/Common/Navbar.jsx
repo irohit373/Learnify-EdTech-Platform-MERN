@@ -15,7 +15,6 @@ import {AiOutlineClose} from "react-icons/ai"
 import { createCategoryURL } from '../../Util/categoryUtils'
 import './loader.css'
 import './mobile-menu.css'
-// Ḍemo temporary data
 // const subLinks = [
 //     {
 //         title: "Python",
@@ -28,12 +27,8 @@ import './mobile-menu.css'
 // ];
 
 const Navbar = () => {
-    // console.log("Printing base url: ",process.env.REACT_APP_BASE_URL);
-    
     const {token} = useSelector((state)=> state.auth);
-    // console.log("token in Navbar is",token)
     const {user} = useSelector((state)=> state.profile);
-    // console.log("User in Navbar is",user)
     const {cart} = useSelector((state)=> state.cart);
     const {totalItems} = useSelector((state)=> state.cart);
     const location = useLocation();
@@ -44,7 +39,6 @@ const Navbar = () => {
     const fetchSublinks = async() => {
         try{
             const result = await apiConnector("GET", categories.CATEGORIES_API);
-            // console.log("Printing Sublinks result:" , result);
             setSubLinks(result.data.data);
         }
         catch(error) {

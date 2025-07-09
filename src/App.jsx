@@ -106,28 +106,29 @@ function App() {
           }
         >
           <Route path="dashboard/my-profile" element={<MyProfile />} />
-          <Route path="dashboard/Settings" element={<Settings />} />
-          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
-            <>
-              <Route path="dashboard/instructor" element={<Instructor />} />
-              <Route path="dashboard/my-courses" element={<MyCourses />} />
-              <Route path="dashboard/add-course" element={<AddCourse />} />
-              <Route
-                path="dashboard/edit-course/:courseId"
-                element={<EditCourse />}
-              />
-            </>
-          )}
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <>
-              <Route
-                path="dashboard/enrolled-courses"
-                element={<EnrolledCourses />}
-              />
-              <Route path="/dashboard/cart" element={<Cart />} />
-            </>
-          )}
           <Route path="dashboard/settings" element={<Settings />} />
+          
+          {/* Instructor Routes */}
+          <Route path="dashboard/instructor" element={
+            user?.accountType === ACCOUNT_TYPE.INSTRUCTOR ? <Instructor /> : <Error />
+          } />
+          <Route path="dashboard/my-courses" element={
+            user?.accountType === ACCOUNT_TYPE.INSTRUCTOR ? <MyCourses /> : <Error />
+          } />
+          <Route path="dashboard/add-course" element={
+            user?.accountType === ACCOUNT_TYPE.INSTRUCTOR ? <AddCourse /> : <Error />
+          } />
+          <Route path="dashboard/edit-course/:courseId" element={
+            user?.accountType === ACCOUNT_TYPE.INSTRUCTOR ? <EditCourse /> : <Error />
+          } />
+          
+          {/* Student Routes */}
+          <Route path="dashboard/enrolled-courses" element={
+            user?.accountType === ACCOUNT_TYPE.STUDENT ? <EnrolledCourses /> : <Error />
+          } />
+          <Route path="dashboard/cart" element={
+            user?.accountType === ACCOUNT_TYPE.STUDENT ? <Cart /> : <Error />
+          } />
         </Route>
 
         <Route

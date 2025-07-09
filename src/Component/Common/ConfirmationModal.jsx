@@ -11,10 +11,12 @@ export default function ConfirmationModal({ modalData }) {
           {modalData?.text2}
         </p>
         <div className="flex items-center gap-x-4">
-          <IconBtn
-            onclick={modalData?.btn1Handler}
-            text={modalData?.btn1Text}
-          />
+          <button
+            className="cursor-pointer rounded-md bg-yellow-100 py-[8px] px-[20px] font-semibold text-richblack-900"
+            onClick={modalData?.btn1Handler}
+          >
+            {modalData?.btn1Text}
+          </button>
           <button
             className="cursor-pointer rounded-md bg-richblack-200 py-[8px] px-[20px] font-semibold text-richblack-900"
             onClick={modalData?.btn2Handler}

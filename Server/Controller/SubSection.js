@@ -12,13 +12,11 @@ exports.createSubSection = async (req, res) => {
         .status(404)
         .json({ success: false, message: "All Fields are Required" });
     }
-    console.log(video);
 
     const uploadDetails = await uploadImageToCloudinary(
       video,
       process.env.FOLDER_NAME
     );
-    console.log(uploadDetails);
 
     const SubSectionDetails = await SubSection.create({
       title: title,
@@ -78,8 +76,6 @@ exports.updateSubSection = async (req, res) => {
     const updatedSection = await Section.findById(sectionId).populate(
       "subSection"
     );
-
-    console.log("updated section", updatedSection);
 
     return res.json({
       success: true,

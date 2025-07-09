@@ -62,7 +62,6 @@ exports.updateSection = async (req, res) => {
         },
       })
       .exec();
-    console.log(course);
     res.status(200).json({
       success: true,
       message: section,

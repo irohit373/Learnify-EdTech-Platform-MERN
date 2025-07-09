@@ -51,7 +51,6 @@ exports.signup = async (req, res) => {
     }
 
     const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-    console.log(response);
     if (!response.length) {
       return res.status(400).json({
         success: false,
@@ -178,9 +177,6 @@ exports.sendotp = async (req, res) => {
       specialChars: false,
     });
     const result = await OTP.findOne({ otp: otp });
-    console.log("Result is Generate OTP Func");
-    console.log("OTP", otp);
-    console.log("Result", result);
     while (result) {
       otp = otpGenerator.generate(6, {
         upperCaseAlphabets: false,
@@ -188,14 +184,12 @@ exports.sendotp = async (req, res) => {
     }
     const otpPayload = { email, otp };
     const otpBody = await OTP.create(otpPayload);
-    console.log("OTP Body", otpBody);
     res.status(200).json({
       success: true,
       message: `OTP Sent Successfully`,
       otp,
     });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -232,7 +226,6 @@ exports.changePassword = async (req, res) => {
         //   `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
         // )
       );
-      console.log("Email sent successfully:", emailResponse.response);
     } catch (error) {
       console.error("Error occurred while sending email:", error);
       return res.status(500).json({
